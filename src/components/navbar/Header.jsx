@@ -5,18 +5,20 @@ import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
 import { useState, useEffect } from "react";
 
-const Header = () => {
+const Header = ({onColorChange}) => {
   const [colorPage, setColorPage] = useState(false);
 
   useEffect(() => {
     if (colorPage) {
       document.body.classList.add("bg-black", "text-white");
-      document.body.classList.remove("bg-white", "text-black");
+      document.body.classList.remove("bg-white", "text-indigo-600");
     } else {
-      document.body.classList.add("bg-white", "text-black");
+      document.body.classList.add("bg-white", "text-indigo-600");
       document.body.classList.remove("bg-black", "text-white");
     }
-  }, [colorPage]);
+    onColorChange(colorPage)
+  }, [colorPage,onColorChange]);
+  
 
   const changePageColor = () => {
     setColorPage((prev) => !prev);

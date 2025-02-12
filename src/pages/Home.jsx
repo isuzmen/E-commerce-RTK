@@ -1,8 +1,9 @@
+import SliderProduct from "../components/home/SliderProduct"
 
-const Home = () => {
+const Home = ({colorPage}) => {
   return (
     <div>
-      
+      <SliderProduct colorPage={colorPage}/>
     </div>
   )
 }

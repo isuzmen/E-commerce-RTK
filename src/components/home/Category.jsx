@@ -1,24 +1,46 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getCategories } from "../../redux/categorySlice"
-import MenuIcon from '@mui/icons-material/Menu';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../redux/categorySlice";
 
+const Category = ({colorPage}) => {
 
-const Category = () => {
+  const [selectedCategory, setSelectedCategory] = useState("")
 
-   const dispatch = useDispatch()
-   const {categories} = useSelector(state => state.categoriesReducer)
-      
-   useEffect(() => {
-    dispatch(getCategories())
-   },[dispatch])
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.categoriesReducer);
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   return (
-      <div className="w-1/6 bg-white-200 p-4 rounded-md shadow-lg shadow-purple-300  flex items-center justify-start gap-4"> 
-        <MenuIcon className="text-indigo-800 cursor-pointer" />
-        <p>Categories</p>
-      </div>
-  )
-}
+    <div className={`flex w-2/12 h-full items-center justify-evenly shadow-lg shadow-purple-300
+    ${colorPage ? "bg-black text-purple-100" : "bg-purple-100 text-indigo-800" }
+    `}>
 
-export default Category
+      <select
+        value={selectedCategory} 
+        onChange={(e) => setSelectedCategory(e.target.value)}
+        className={`px-2 py-1 rounded-md 
+        ${colorPage ? "bg-black text-purple-100" : "bg-purple-100 text-indigo-800"}  
+        `}>
+        
+        <option value="" >Categories</option>
+          {
+            categories.length > 0 ? (
+              categories?.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))
+            ) : (
+              <option>Loading</option>
+            )
+          }
+      </select>
+    </div>
+  );
+};
+
+export default Category;
+

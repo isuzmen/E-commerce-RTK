@@ -1,6 +1,6 @@
 const Sorting = ({ colorPage }) => {
   return (
-    <div className={`w-2/12 h-full flex items-center justify-center p-4 rounded-md shadow-lg shadow-purple-300           
+    <div className={`w-2/12 h-full font-medium flex items-center justify-center p-4 rounded-md shadow-lg shadow-purple-300           
     ${colorPage ? "bg-black" : "bg-purple-100 "}
         `}>
       <select

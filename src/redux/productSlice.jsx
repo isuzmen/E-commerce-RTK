@@ -11,6 +11,11 @@ export const getAllProducts = createAsyncThunk("getAllProducts", async () => {
     return response.data
 })
 
+export const getByCategory = createAsyncThunk("getByCategory", async (id) => {
+    const response = await axios.get(`https://api.escuelajs.co/api/v1/products/?categoryId=${id}`)
+    return response.data
+})
+
 const productSlice = createSlice({
     name:"products",
     initialState,
@@ -25,6 +30,16 @@ const productSlice = createSlice({
             state.products = action.payload
         })
         .addCase(getAllProducts.rejected,(state)=> {
+            state.productStatus ="fail"
+        })
+        .addCase(getByCategory.pending, (state) => {
+            state.productStatus = "loading"
+        })
+        .addCase(getByCategory.fulfilled, (state,action)=> {
+            state.productStatus ="succeeded"
+            state.products = action.payload
+        })
+        .addCase(getByCategory.rejected,(state)=> {
             state.productStatus ="fail"
         })
     }

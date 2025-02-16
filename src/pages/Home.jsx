@@ -17,10 +17,10 @@ const Home = ({ colorPage }) => {
       <div className="flex items-center justify-between my-5 h-[58px] gap-x-6 w-full">
         <Category colorPage={colorPage} setCategory={setCategory}/>
         <CategoryProducts colorPage={colorPage}/>
-        <Sorting colorPage={colorPage}/>
+        <Sorting colorPage={colorPage} setSort={setSort}/>
       </div>
       <div className="mt-8">
-        <Products colorPage={colorPage} category={category}/>
+        <Products colorPage={colorPage} category={category} sort={sort}/>
       </div>
     </div>
   );

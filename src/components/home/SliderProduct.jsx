@@ -74,10 +74,10 @@ const SliderProduct = ({ colorPage }) => {
 
                   <div className="w-full flex justify-center">
                     <div
-                      className={`w-[200px] h-16 text-2xl border rounded-full flex justify-center items-center font-semibold ${
+                      className={`w-[200px] h-16 text-2xl border rounded-full cursor flex justify-center items-center font-semibold ${
                         colorPage
-                          ? "text-white bg-purple-600"
-                          : "text-indigo-800 bg-purple-300"
+                          ? "text-white bg-purple-500 hover:bg-purple-700"
+                          : "text-indigo-800 bg-purple-300 hover:bg-purple-500"
                       }`}
                     >
                       Review

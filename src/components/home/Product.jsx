@@ -2,12 +2,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; 
 import "swiper/css/navigation"; 
 import { Navigation } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ product, colorPage }) => {
-  const { images, price, title } = product;
+
+  const navigate = useNavigate()
+  const {images, price, title } = product;
 
   return (
-    <div className={`w-[260px] h-[380px] rounded-[10px] m-3 shadow-md cursor-pointer
+    <div onClick={() => navigate(`products/${product?.id}`)} className={`w-[260px] h-[380px] rounded-[10px] m-3 shadow-md cursor-pointer
       ${colorPage ? "hover:bg-zinc-950 shadow-purple-200" : "hover:bg-purple-100 shadow-purple-400"}
     `}>
       

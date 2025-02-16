@@ -5,7 +5,7 @@ import Loading from "../Loading";
 import Product from "./Product";
 import ReactPaginate from "react-paginate";
 
-const Products = ({colorPage, category}) => {
+const Products = ({colorPage, category, sort}) => {
 
   const dispatch = useDispatch()
   const {products,productStatus} = useSelector(state => state.products)
@@ -30,6 +30,8 @@ const Products = ({colorPage, category}) => {
     setItemOffset(newOffset);
   };
 
+  console.log(sort)
+
   useEffect(() => {
     if(category){
       dispatch(getByCategory(category))
@@ -45,7 +47,7 @@ const Products = ({colorPage, category}) => {
         <>
           <div className="flex flex-wrap mt-[20px] ml-2">
             {
-              currentItems?.map((product,i) => (
+              currentItems.sort((a,b) => sort === "Increment" ? a.price - b.price : sort === "Decrement" ? b.price-a.price : "")?.map((product,i) => (
                       <Product key={i} colorPage={colorPage} product={product} />
               ))
             }

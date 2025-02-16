@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from 'react';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   const [colorPageFromHeader,setColorPageFromHeader] = useState(false)
@@ -21,6 +22,7 @@ function App() {
             <Header onColorChange = {handleColorChange}/>
             <Routes>
                 <Route  path='/' element={<Home colorPage ={colorPageFromHeader} />} />
+                <Route  path='/products/:id' element={<ProductDetail/>} />
             </Routes>
         </BrowserRouter>
       </Container>

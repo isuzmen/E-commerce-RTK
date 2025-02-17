@@ -22,7 +22,7 @@ function App() {
             <Header onColorChange = {handleColorChange}/>
             <Routes>
                 <Route  path='/' element={<Home colorPage ={colorPageFromHeader} />} />
-                <Route  path='/products/:id' element={<ProductDetail/>} />
+                <Route  path='/products/:id' element={<ProductDetail colorPage ={colorPageFromHeader}/>} />
             </Routes>
         </BrowserRouter>
       </Container>

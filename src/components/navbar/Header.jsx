@@ -7,12 +7,14 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Drawer } from "@mui/material";
 import { removeFromBasket, clearBasket, calcBasket } from "../../redux/cardSlice";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ onColorChange }) => {
   const [colorPage, setColorPage] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { products, totalAmount } = useSelector((store) => store.card);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (colorPage) {
@@ -37,8 +39,8 @@ const Header = ({ onColorChange }) => {
 
   return (
     <div className="flex justify-between items-center my-5 p-5 transition-all duration-500">
-      <div>
-        <p className="text-5xl font-sans font-[400]">Traced-e</p>
+      <div onClick={() => navigate("/")}>
+        <p className="text-5xl font-sans font-[400] cursor-pointer">Traced-e</p>
       </div>
       <div className="flex items-center gap-2">
         <div

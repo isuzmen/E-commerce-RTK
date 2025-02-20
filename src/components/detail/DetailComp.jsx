@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addToBasket, calcBasket } from "../../redux/cardSlice";
 
 const DetailComp = ({ productDetail, colorPage }) => {
     const defaultImage = "https://via.placeholder.com/900x550?text=No+Image";
 
     const images = productDetail?.images?.length > 0 ? productDetail.images : [defaultImage];
+    const dispatch = useDispatch()
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [count, setCount] = useState(0);
 
@@ -19,6 +22,22 @@ const DetailComp = ({ productDetail, colorPage }) => {
     const nextImage = () => {
         setCurrentImageIndex(prevIndex => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
     };
+
+    const addBasket = () => {
+      if (count > 0) {
+        dispatch(addToBasket({
+          id: productDetail?.id,
+          title: productDetail?.title,
+          count: count,
+          price: productDetail?.price,
+          images: productDetail?.images
+        }));
+        dispatch(calcBasket())
+      } else {
+        alert("Please add at least 1 item to the basket.");
+      }
+    };
+    
 
     return (
         <div className={`flex flex-row justify-center mt-10 gap-10 border-none shadow-md shadow-fuchsia-300
@@ -60,20 +79,20 @@ const DetailComp = ({ productDetail, colorPage }) => {
 
             <div className="w-full mr-10">
                 <h1 className={`text-4xl font-semibold mt-7
-                ${colorPage ? "text-fuchsia-300" : "text-indigo-950"}  
+                ${colorPage ? "text-fuchsia-200" : "text-purple-950"}  
                 `}>
                 {productDetail?.title}
                 </h1>
-                <h3 className={`mt-7 text-[17px] ${colorPage ? "text-fuchsia-300":"text-purple-950"}`}>{productDetail?.description}</h3>
-                <h1 className={`text-4xl font-semibold ${colorPage ? "text-fuchsia-300" : "text-fuchsia-950"}  mt-10`}> {productDetail?.price}$</h1>
+                <h3 className={`mt-7 text-[17px] ${colorPage ? "text-fuchsia-200":"text-purple-950"}`}>{productDetail?.description}</h3>
+                <h1 className={`text-4xl font-semibold ${colorPage ? "text-fuchsia-200" : "text-purple-950"}  mt-10`}> {productDetail?.price}$</h1>
 
                 <div className="flex items-center gap-2 mt-7">
-                    <CiCirclePlus onClick={increment} className={`cursor-pointer text-3xl ${colorPage ? "text-fuchsia-300" : "text-fuchsia-950"}`} /> 
-                    <span className={`${colorPage ? "text-fuchsia-300" :"text-fuchsia-950"} text-3xl`}>{count}</span> 
-                    <CiCircleMinus onClick={decrement} className={`cursor-pointer text-3xl ${colorPage ? "text-fuchsia-300" : "text-fuchsia-950" } `} />
+                    <CiCirclePlus onClick={increment} className={`cursor-pointer text-3xl ${colorPage ? "text-fuchsia-200" : "text-purple-950"}`} /> 
+                    <span className={`${colorPage ? "text-fuchsia-200" :"text-purple-950"} text-3xl`}>{count}</span> 
+                    <CiCircleMinus onClick={decrement} className={`cursor-pointer text-3xl ${colorPage ? "text-fuchsia-200" : "text-purple-950" } `} />
                 </div>
 
-                <button className="bg-fuchsia-300 text-fuchsia-950 mt-10 rounded-md border border-fuchsia-800 p-2.5 text-xl font-semibold hover:bg-fuchsia-950 hover:text-fuchsia-300 transition-all ease-in-out duration-300">
+                <button onClick={addBasket} className={`mt-10 rounded-md border ${colorPage ?"text-purple-400 bg-purple-950 hover:bg-purple-400 hover:text-purple-950" : " border-purple-950 bg-purple-400 hover:bg-purple-950 hover:text-fuchsia-200 text-purple-950"}  p-3 text-xl font-semibold transition-all ease-in-out duration-300`}>
                     Add to basket
                 </button>
             </div>

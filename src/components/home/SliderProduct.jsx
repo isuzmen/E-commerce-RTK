@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom"; 
 
 const SliderProduct = ({ colorPage }) => {
   const [forSlider, setForSlider] = useState([]);
   const baseURL = "https://api.escuelajs.co/api/v1/products";
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -46,14 +48,14 @@ const SliderProduct = ({ colorPage }) => {
           <div key={product.id}>
             <div
               className={`flex flex-col md:flex-row items-center justify-between px-10 rounded-lg shadow-xl h-auto md:h-[500px] transition-all ease-out duration-500  
-              ${ colorPage ? "bg-black" : "bg-purple-100"
+              ${ colorPage ? "bg-black" : "bg-purple-200"
               }`}
             >
               {/* Left */}
               <div className="w-full md:w-1/2 flex flex-col justify-evenly items-start text-center md:text-left h-full">
                 <h1
                   className={`text-3xl md:text-5xl font-bold ${
-                    colorPage ? "text-purple-400" : "text-violet-950"
+                    colorPage ? "text-purple-300" : "text-violet-950"
                   }`}
                 >
                   {product.title}
@@ -61,27 +63,28 @@ const SliderProduct = ({ colorPage }) => {
 
                 <p
                   className={`text-lg ${
-                    colorPage ? "text-purple-300" : "text-violet-600"
+                    colorPage ? "text-fuchsia-200" : "text-purple-950"
                   }`}
                 >
                   {product.description}
                 </p>
 
                 <div className="w-full flex items-center justify-between">
-                  <div className="text-3xl font-semibold text-violet-600">
+                  <div className={`text-3xl font-semibold ${colorPage ? "text-purple-400" : "text-violet-950"}`}>
                     ${product.price}
                   </div>
 
                   <div className="w-full flex justify-center">
-                    <div
-                      className={`w-[200px] h-16 text-2xl border rounded-full cursor flex justify-center items-center font-semibold ${
+                    <button
+                      onClick={() => navigate(`/products/${product.id}`)}
+                      className={`w-[200px] h-16 text-2xl border rounded-xl cursor-pointer flex justify-center items-center font-semibold transition-all ease-out 0.6s ${
                         colorPage
-                          ? "text-white bg-purple-500 hover:bg-purple-700"
-                          : "text-indigo-800 bg-purple-300 hover:bg-purple-500"
+                          ? "text-purple-400 bg-purple-950 hover:bg-purple-400 hover:text-purple-950"
+                          : "text-purple-950 bg-purple-400 border-fuchsia-950 hover:bg-purple-950 hover:text-fuchsia-200"
                       }`}
                     >
                       Review
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>

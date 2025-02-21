@@ -9,14 +9,18 @@ const Products = ({ colorPage, category, sort }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.loading.isLoading);
   const { products } = useSelector((state) => state.products);
+  const { filteredProducts } = useSelector((state) => state.search);
+  const displayedProducts = filteredProducts.length > 0 ? filteredProducts : products
+
   const [itemOffset, setItemOffset] = useState(0);
+
   const itemsPerPage = 12;
   const endOffset = itemOffset + itemsPerPage;
-  const currentItems = products.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(products.length / itemsPerPage);
+  const currentItems = displayedProducts.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(displayedProducts.length / itemsPerPage);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % products.length;
+    const newOffset = (event.selected * itemsPerPage) % displayedProducts.length;
     setItemOffset(newOffset);
   };
 

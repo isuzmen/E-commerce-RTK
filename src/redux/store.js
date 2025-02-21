@@ -4,6 +4,8 @@ import productSlice from './productSlice'
 import productDetailSlice from './productDetailSlice'
 import cardSlice from './cardSlice'
 import loadingReducer from './loadingSlice'
+import searchReducer from "./searchSlice";
+
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +13,9 @@ export const store = configureStore({
     products : productSlice,
     productDetail: productDetailSlice,
     card : cardSlice,
-    loading: loadingReducer
+    loading: loadingReducer,
+    search: searchReducer
   },
 })
+
+export default store;

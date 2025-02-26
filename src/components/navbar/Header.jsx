@@ -76,6 +76,15 @@ const Header = ({ onColorChange }) => {
       <div onClick={reloadPage} className="cursor-pointer">
         <p className="text-5xl font-sans font-[400]">Traced-e</p> 
       </div>
+      {location.pathname === "/auth" ? (
+        <div>
+          {colorPage ? (
+            <MdDarkMode size={30} onClick={changePageColor} className="cursor-pointer text-white" />
+          ) : (
+            <CiLight size={30} onClick={changePageColor} className="cursor-pointer text-black" />
+          )}
+        </div>
+      ):(
       <div className="flex items-center gap-2">
         <div
           className={`flex items-center border p-2 rounded-full cursor-pointer ${
@@ -118,7 +127,7 @@ const Header = ({ onColorChange }) => {
           </div>
         </div>
       </div>
-
+      )}
       <Drawer anchor="right" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <div className={`w-100 h-full flex flex-col border ${colorPage ? "bg-black text-fuchsia-200 border-l-fuchsia-100" : "bg-purple-300 text-purple-950 border-l-fuchsia-950"}`}>
           <h2 className="text-3xl font-bold mb-8 p-3">Your Basket</h2>

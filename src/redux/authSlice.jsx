@@ -7,8 +7,13 @@ const authSlice = createSlice({
   },
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload;
-    },
+      console.log("User set in Redux:", action.payload);
+      state.user = {
+        uid: action.payload.uid,
+        email: action.payload.email,
+        displayName: action.payload.displayName,
+      };
+    },    
     clearUser: (state) => {
       state.user = null;
     },
